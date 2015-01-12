@@ -22,13 +22,19 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 public class WordDocReaderMain {
 
     public static void main(String[] args) {
+        
+        /*** Döküman içerisinde değiştirilecek alanlar ve değerleri***/
         HashMap<String, String> keys = new HashMap<String, String>();
         keys.put("#name#", "Ali");
         keys.put("#surname#", "Şentürk");
         keys.put("#birthdate#", "09/08/1980");
         keys.put("#companyName#", "A.B.C. A.Ş. İnsan Kaynakları Müdürlüğü");
        
+        /*** Dçküman okuması yapılıyor **/
         readWordDoc("c:/temp/test1.docx","c:/temp/test2.docx", keys);
+        
+        /*  dosya isimleri aynı verilirse okunan dosyanın içeriği değiştirilmiş olunur.           
+        */
         
     }
 
@@ -40,8 +46,7 @@ public class WordDocReaderMain {
             XWPFDocument doc = new XWPFDocument(fis);        
             doc = replaceText(doc, keyMap);
         
-            out = new FileOutputStream(new File(newFilePath));
-
+            out = new FileOutputStream(new File(newFilePath)); // yeni dosya oluşturuluyor. 
             doc.write(out);
         } catch (Exception e) {
             e.printStackTrace();
